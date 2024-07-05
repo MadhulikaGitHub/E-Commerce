@@ -29,6 +29,7 @@ function Login() {
       dispatch(clearErrors());
     }
     if (isAuthenticated) {
+      alert.success('Login successful !')
       navigate("/");
     }
   }, [error, alert, dispatch, isAuthenticated, navigate]);

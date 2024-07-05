@@ -27,31 +27,64 @@ export const userRegisterReducer = (state = { user: {} }, action) => {
 
         case REGISTER_USER_REQUEST:
         case LOGIN_REQUEST:
-        case UPDATE_PASSWORD_REQUEST:
+        case LOAD_USER_REQUEST:
             return {
                 loading: true,
                 isAuthenticated: false
             }
         case REGISTER_USER_SUCCESS:
         case LOGIN_SUCCESS:
+        case LOAD_USER_SUCCESS:
             return {
                 loading: false,
                 isAuthenticated: true,
                 user: action.payload
             }
-        case UPDATE_PASSWORD_SUCCESS:
-            return {
-                loading: false,
-                isAuthenticated: true,
-                message: action.payload
-            }
         case REGISTER_USER_FAIL:
         case LOGIN_FAIL:
-        case UPDATE_PASSWORD_FAIL:
+        case LOAD_USER_FAIL:
             return {
                 loading: false,
                 isAuthenticated: false,
                 error: action.payload,
+            }
+        case LOGOUT_SUCCESS:
+            return {
+                loading: false,
+                user: null,
+                isAuthenticated: false,
+            };
+        case LOGOUT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        case UPDATE_PROFILE_REQUEST:
+        case UPDATE_PASSWORD_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case UPDATE_PROFILE_SUCCESS:
+        case UPDATE_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isUpdated: action.payload
+            }
+        case UPDATE_PASSWORD_FAIL:
+        case UPDATE_PROFILE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case UPDATE_PASSWORD_RESET:
+        case UPDATE_PROFILE_RESET:
+            return {
+                ...state,
+                isUpdated: false
             }
         case CLEAR_ERRORS:
             return {

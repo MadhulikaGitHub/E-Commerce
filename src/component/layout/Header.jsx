@@ -1,7 +1,26 @@
 import React from 'react'
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { logout } from '../../redux/actions/UserAction'
+import { useAlert } from 'react-alert'
 
 function Header() {
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { user, loading } = useSelector(state => state.auth)
+    console.log(user)
+
+    const { cartItems } = useSelector(state => state.cart)
+    const alert = useAlert()
+
+    const handleLogout = () => {
+        dispatch(logout())
+        alert.success('Logged out successfully !')
+    }
+
+
     return (
         <div>
             {/* topBar start */}
@@ -9,15 +28,41 @@ function Header() {
                 <div className="row py-1 px-xl-5 text-secondary" style={{ backgroundColor: '#f5f5f5' }}>
                     <div className="col-lg-6 d-none d-lg-block">
                         <div className="d-inline-flex align-items-center h-100">
-                            <Link to='/'className="nav-link aa ms-3">Home</Link>
-                            <Link to='/contact'className="nav-link aa ms-3">contact</Link>
-                            <Link to=''className="nav-link aa ms-3">Help</Link>
-                            <Link to=''className="nav-link aa ms-3">FAQs</Link>
+                            <Link to='/' className="nav-link aa ms-3">Home</Link>
+                            <Link to='/contact' className="nav-link aa ms-3">contact</Link>
+                            <Link to='' className="nav-link aa ms-3">Help</Link>
+                            <Link to='' className="nav-link aa ms-3">FAQs</Link>
                         </div>
                     </div>
                     <div className="col-lg-6 ts lg-center">
                         <div className="d-inline-flex align-items-center ">
-                            <div className="dropdown mx-2">
+
+                            {
+                                user ? (
+
+                                    <div className="btn-group">
+                                        <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">{user && user.name}</button>
+                                        <div className="dropdown-menu dropdown-menu-right">
+                                            <div style={{ display: "flex", flexWrap: "nowrap", alignItems: "center", justifyContent: "center" }}>
+                                                <img style={{ height: "18px", width: "18px", borderRadius: "100%", marginLeft: "20px" }} src={user.image && user.image.url} className='rounded-circle' alt={user && user.name} />
+                                                <span className="dropdown-item">{user && user.name}</span>
+                                            </div>
+                                            {
+                                                user && user.role !== 'admin' ? (
+                                                    <Link className="dropdown-item" to='/orders/me'>Orders</Link>
+                                                ) : (
+                                                    <Link className="dropdown-item" to='/admin/dashboard'>Dashboard</Link>
+                                                )
+                                            }
+                                            <Link className="dropdown-item" to='/profile'>Profile</Link>
+                                            <Link to="/" className="dropdown-item" onClick={handleLogout}>Logout</Link>
+                                        </div>
+                                    </div>
+
+                                ) : !loading && <Link className="dropdown-item" to='/login'>Sign in</Link>
+                            }
+
+                            {/* <div className="dropdown mx-2">
                                 <button type="button" className="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown">My Account</button>
                                 <ul className="dropdown-menu dropdown-menu-right">
                                     <li>
@@ -29,7 +74,7 @@ function Header() {
                                         </Link>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> */}
                             <div className="dropdown mx-2">
                                 <button type="button" className="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown">USD</button>
                                 <ul className="dropdown-menu dropdown-menu-right">

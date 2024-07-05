@@ -35,7 +35,7 @@ function Cart() {
 
     const checkoutHandler = () => {
         if (isAuthenticated) {
-            navigate('/checkout')
+            navigate('/shipping')
         } else {
             navigate('/login')
         }
@@ -286,7 +286,7 @@ function Cart() {
                                                 ).toFixed(2)}`}</h5>
                                             </div>
                                             <div className="text-center">
-                                                <button className="btn w-100 my-3 py-3 rounded-0 font-weight-bold btn-warning" onClick={checkoutHandler}> Proceed To Cheakout</button>
+                                                <button className="btn w-100 my-3 py-3 rounded-0 font-weight-bold btn-warning" onClick={checkoutHandler}> Proceed To Checkout</button>
                                             </div>
                                         </div>
                                     </div>
