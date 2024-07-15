@@ -25,7 +25,7 @@ function Shipping() {
 
     return (
         <>
-            <CheckoutStep confirmOrder />
+            <CheckoutStep shipping />
             <div className='container'>
                 <div className="row wrapper">
                     <div className="col-10 col-lg-5">

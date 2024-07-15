@@ -33,7 +33,7 @@ function ConfirmOrder() {
 
   return (
     <>
-      <CheckoutStep shipping />
+      <CheckoutStep confirmOrder/>
 
       <div className="container">
         <div className="row d-flex justify-content-between">

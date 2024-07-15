@@ -13,6 +13,7 @@ import {
 import CheckoutStep from '../cart/CheckoutStep';
 import './Payment.css'
 import { useNavigate } from 'react-router-dom';
+import { createOrder, clearErrors } from '../../redux/actions/OrderAction';
 
 const options = {
   style: {
@@ -37,6 +38,10 @@ function Payment() {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
   // const { error } = useSelector((state) => state.newOrder);
+  const paymentData = {
+    amount: Math.round(orderInfo.totalPrice * 100),
+
+  };
 
   const order = {
     shippingInfo,
@@ -47,9 +52,68 @@ function Payment() {
     totalPrice: orderInfo.totalPrice,
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault()
+    document.querySelector('#pay_btn').disabled = true;
+
+    try {
+      const { data } = await axios.post(
+        "/api/payment/process",
+        paymentData,
+      );
+      //console.log(data)
+
+      const client_secret = data.client_secret;
+      //console.log(client_secret)
+
+      if (!stripe || !elements) return;
+
+      const result = await stripe.confirmCardPayment(client_secret, {
+        payment_method: {
+          card: elements.getElement(CardNumberElement),
+          billing_details: {
+            name: user.name,
+            email: user.email,
+            address: {
+              line1: shippingInfo.address,
+              city: shippingInfo.city,
+              // phone: shippingInfo.phoneNo,
+              postal_code: shippingInfo.postalcode,
+              // currency: 'usd',
+              country: shippingInfo.country,
+            },
+          },
+        },
+      });
+      console.log(result)
+
+      //Order
+      if (result.error) {
+        alert.error(result.error.message);
+        document.querySelector('#pay_btn').disabled = false;
+      } else {
+        if (result.paymentIntent.status === "succeeded") {
+          //todo :new order
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+          dispatch(createOrder(order))
+          navigate("/success");
+        } else {
+          alert.error("There's some issue while processing payment ");
+        }
+      }
+
+
+    }
+    catch (error) {
+      document.querySelector('#pay_btn').disabled = false;
+      //alert.error(error.response.data.message);
+      console.log(error)
+    }
   }
+
 
   return (
     <>
@@ -92,7 +156,7 @@ function Payment() {
               onClick={submitHandler}
               className="btn btn-block py-3"
             >
-              Pay
+              Pay {`- ${orderInfo && orderInfo.totalPrice}`}
             </button>
 
           </form>
