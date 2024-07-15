@@ -23,6 +23,8 @@ import Payment from './component/payment/Payment'
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Success from './component/payment/Success'
+import MyOrder from './component/order/MyOrder'
+import OrderDetails from './component/order/OrderDetails'
 
 function App() {
 
@@ -51,14 +53,16 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/checkoutStep" element={<CheckoutStep />} />
+
+        {/* Secure */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} /> 
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/order/confirm" element={<ConfirmOrder />} />
         <Route path="/success" element={<Success/>} />
+        <Route path="/orders/me" element={<MyOrder/>} />
+        <Route path="/orderDetails" element={<OrderDetails/>} />
 
         {
           stripeApiKey && (
