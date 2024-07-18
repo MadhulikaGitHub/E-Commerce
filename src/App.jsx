@@ -12,12 +12,9 @@ import Registration from './component/user/Registration'
 import Profile from './component/user/Profile'
 import Dashboard from './component/admin/Dashboard'
 import Contact from './component/Contact'
-import Checkout from './component/checkout/Checkout'
-import PasswordUpdate from './component/user/PasswordUpdate'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { loadUser } from './redux/actions/UserAction'
 import Shipping from './component/cart/Shipping'
-import CheckoutStep from './component/cart/CheckoutStep'
 import ConfirmOrder from './component/cart/ConfirmOrder'
 import Payment from './component/payment/Payment'
 import { Elements } from "@stripe/react-stripe-js";
@@ -25,8 +22,11 @@ import { loadStripe } from "@stripe/stripe-js";
 import Success from './component/payment/Success'
 import MyOrder from './component/order/MyOrder'
 import OrderDetails from './component/order/OrderDetails'
+import ProtectedRoute from './component/protectedRoute/ProtectedRoute'
 
 function App() {
+
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const [stripeApiKey, setStripeApiKey] = useState("");
 
@@ -56,13 +56,15 @@ function App() {
         <Route path="/contact" element={<Contact />} />
 
         {/* Secure */}
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} /> 
-        <Route path="/shipping" element={<Shipping />} />
-        <Route path="/order/confirm" element={<ConfirmOrder />} />
-        <Route path="/success" element={<Success/>} />
-        <Route path="/orders/me" element={<MyOrder/>} />
-        <Route path="/orderDetails" element={<OrderDetails/>} />
+        <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/shipping" element={<Shipping />} />
+          <Route path="/order/confirm" element={<ConfirmOrder />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="/orders/me" element={<MyOrder />} />
+          <Route path="/order/:id" element={<OrderDetails />} />
+        </Route>
 
         {
           stripeApiKey && (
@@ -76,7 +78,7 @@ function App() {
             />
           )
         }
-        
+
 
       </Routes>
       <Footer />

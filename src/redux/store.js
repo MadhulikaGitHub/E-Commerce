@@ -6,6 +6,7 @@ import { productDetailsReducer, productReducer } from './reducers/ProductReducer
 import { cartReducer } from './reducers/CartReducer';
 import { sliderReducer } from './reducers/SliderReducer';
 import { userRegisterReducer } from './reducers/UserReducer';
+import { myOrdersReducer, newOrderReducer } from './reducers/OrderReducer';
 
 const reducer = combineReducers({
     cat: categoriesReducer,
@@ -14,6 +15,8 @@ const reducer = combineReducers({
     cart: cartReducer,
     slide: sliderReducer,
     auth: userRegisterReducer,
+    newOrder: newOrderReducer,
+    myOrders: myOrdersReducer,
 })
 
 let initializeState = {
