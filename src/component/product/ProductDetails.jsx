@@ -9,10 +9,15 @@ function ProductDetails() {
     const [quantity, setQuantity] = useState(1)
 
     const { id } = useParams()
-    console.log(id)
+    //console.log(id)
     const dispatch = useDispatch()
     const { products } = useSelector((state) => state.pDetail)
-    console.log(products)
+    //console.log(products)
+
+    const ratings = []
+    for (let index = 0; index < products.rating; index++) {
+        ratings.push(index);
+    }
 
     const increaseQty = () => {
         if (products.stock <= quantity) return;
@@ -82,17 +87,17 @@ function ProductDetails() {
                             <h3>{products.name}</h3>
                             <div className="d-flex mb-3">
                                 <div className="text-warning mr-2">
-                                    <small className="fas fa-star"></small>
-                                    <small className="fas fa-star"></small>
-                                    <small className="fas fa-star"></small>
-                                    <small className="fas fa-star-half-alt"></small>
-                                    <small className="far fa-star"></small>
+                                    {
+                                        ratings.map((i) => (
+                                            <small className="fa fa-star text-warning me-1"></small>
+                                        ))
+                                    }
                                 </div>
                                 <small className="pt-1">({products.stock} in Stock)</small>
                             </div>
                             <h3 className="font-weight-semi-bold mb-4">₹{products.price}</h3>
                             <p className="mb-4">{products.description}</p>
-                            <div className=" mb-3">
+                            {/* <div className=" mb-3">
                                 <strong className="text-dark me-3">Sizes:</strong>
                                 <form className="d-flex">
                                     <div className="custom-control me-2 custom-radio custom-control-inline">
@@ -141,7 +146,8 @@ function ProductDetails() {
                                         <label className="custom-control-label">Green</label>
                                     </div>
                                 </form>
-                            </div>
+                            </div> */}
+                            <p className="mb-4">{products.category}</p>
                             <div className="d-flex align-items-center mb-4 pt-2">
                                 <div className="input-group quantity me-3" style={{ width: '130px' }}>
                                     <div className="input-group-btn">

@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Slider({ slider, index}) {
-    console.log(index)
+    //console.log(index)
     return (
         
             <div className={`carousel-item carouselHeight ${index === 0 ? 'active' : ''}`} key={index} data-bs-interval="1000">

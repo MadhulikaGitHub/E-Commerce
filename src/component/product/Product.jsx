@@ -40,3 +40,5 @@ function Product({ product }) {
 }
 
 export default Product
+
+
