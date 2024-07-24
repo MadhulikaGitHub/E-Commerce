@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import "./order.css";
+// import "./order.css";
 
-import Loading from '../Layout/Loading'
+import Loading from '../layout/Loading'
 import { Typography } from "@material-ui/core";
-import MetaData from '../../Component/MetaData'
+import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearErrors, getOrderDetails } from '../../actions/OrderAction'
+import { getOrderDetails, clearErrors } from '../../redux/actions/OrderAction';
 
 
 function OrderDetails() {
