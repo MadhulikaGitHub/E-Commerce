@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-// import "./order.css";
+import "./order.css";
 
 import Loading from '../layout/Loading'
 import { Typography } from "@material-ui/core";

@@ -23,6 +23,7 @@ import Success from './component/payment/Success'
 import MyOrder from './component/order/MyOrder'
 import OrderDetails from './component/order/OrderDetails'
 import ProtectedRoute from './component/protectedRoute/ProtectedRoute'
+import ProductList from './component/admin/ProductList'
 
 function App() {
 
@@ -55,9 +56,13 @@ function App() {
         <Route path="/register" element={<Registration />} />
         <Route path="/contact" element={<Contact />} />
 
+        {/* admin */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="admin/product" element={<ProductList/>} />
+
         {/* Secure */}
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          
           <Route path="/profile" element={<Profile />} />
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/order/confirm" element={<ConfirmOrder />} />
