@@ -224,7 +224,7 @@ function Home() {
                 <MetaData title="HOME" />
 
                 {/* carousel start */}
-                <div className="container-fluid">
+                <div className="container-fluid mt-5">
                     <div className="row px-xl-5 mb-2">
 
                         {/* Slider Start */}

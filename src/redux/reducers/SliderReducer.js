@@ -8,7 +8,7 @@ import {
 import axios from 'axios'
 
 export const sliderReducer = (state = { sliders: [] }, action) => {
-    console.log(action.payload)
+    //console.log(action.payload)
     switch (action.type) {
         case ALL_SLIDER_REQUEST:
             return {

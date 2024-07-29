@@ -24,6 +24,9 @@ import MyOrder from './component/order/MyOrder'
 import OrderDetails from './component/order/OrderDetails'
 import ProtectedRoute from './component/protectedRoute/ProtectedRoute'
 import ProductList from './component/admin/ProductList'
+import CategoryList from './component/admin/CategoryList'
+import CreateCategory from './component/admin/CreateCategory'
+import CreateProduct from './component/admin/CreateProduct'
 
 function App() {
 
@@ -59,6 +62,10 @@ function App() {
         {/* admin */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="admin/product" element={<ProductList/>} />
+        <Route path="admin/category" element={<CategoryList/>} />
+        <Route path="admin/createCategory" element={<CreateCategory/>} />
+        <Route path="admin/createProduct" element={<CreateProduct/>} />
+
 
         {/* Secure */}
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>

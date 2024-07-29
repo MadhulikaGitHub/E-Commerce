@@ -308,7 +308,7 @@ function Header() {
                 </div>
             </div>
             {/*Navbar start */}
-            <div className="container-fluid mb-5 bg-secondary">
+            <div className="container-fluid bg-secondary">
                 <div className="row px-xl-5">
                     <div className="col-lg-3 d-none d-lg-block" style={{ height: '65px' }}>
                         {/* <div className="dropdown">
