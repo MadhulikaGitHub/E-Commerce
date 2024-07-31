@@ -29,6 +29,7 @@ import CreateCategory from './component/admin/CreateCategory'
 import CreateProduct from './component/admin/CreateProduct'
 import OrderList from './component/admin/OrderList'
 import UserList from './component/admin/UserList'
+import ProductByCategory from './component/ProductByCategory'
 
 function App() {
 
@@ -60,6 +61,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/productByCategory" element={<ProductByCategory/>} />
 
         {/* admin */}
         <Route path="/dashboard" element={<Dashboard />} />

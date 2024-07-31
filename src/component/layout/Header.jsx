@@ -217,7 +217,7 @@ function Header() {
     };
 
     const handleCategorySelect = (categoryName) => {
-        navigate('/', { state: { selectedCategory: categoryName } });
+        navigate('/productByCategory', { state: { selectedCategory: categoryName } });
     };
 
     return (
