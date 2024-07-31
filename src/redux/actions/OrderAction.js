@@ -85,7 +85,7 @@ import {
   
       const { data } = await axios.get("/api/order/getAllOrders");
   
-      dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders });
+      dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.data });
     } catch (error) {
       dispatch({
         type: ALL_ORDERS_FAIL,

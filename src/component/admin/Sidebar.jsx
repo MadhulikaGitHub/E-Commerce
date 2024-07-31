@@ -69,13 +69,13 @@ function Sidebar() {
                     </li>
 
                     <li>
-                        <Link to="/admin/product">
+                        <Link to="/admin/order">
                             <i className="fas fa-shopping-basket"></i> Orders
                         </Link>
                     </li>
 
                     <li>
-                        <Link to="#">
+                        <Link to="/admin/users">
                             <i className="fas fa-users"></i> Users
                         </Link>
                     </li>

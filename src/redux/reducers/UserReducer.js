@@ -1,23 +1,33 @@
 import {
+    ALL_USERS_REQUEST,
+    ALL_USERS_SUCCESS,
+    ALL_USERS_FAIL,
+
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAIL,
+
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+
     LOAD_USER_REQUEST,
     LOAD_USER_SUCCESS,
     LOAD_USER_FAIL,
+
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
+
     UPDATE_PROFILE_REQUEST,
     UPDATE_PROFILE_SUCCESS,
     UPDATE_PROFILE_RESET,
     UPDATE_PROFILE_FAIL,
+
     UPDATE_PASSWORD_REQUEST,
     UPDATE_PASSWORD_SUCCESS,
     UPDATE_PASSWORD_RESET,
     UPDATE_PASSWORD_FAIL,
+
     CLEAR_ERRORS
 } from '../constants/UserConstant'
 
@@ -95,3 +105,32 @@ export const userRegisterReducer = (state = { user: {} }, action) => {
 
     }
 }
+
+export const allUsersReducer = (state = { users: [] }, action) => {
+    switch (action.type) {
+        case ALL_USERS_REQUEST:
+            return {
+                loading: true,
+            };
+
+        case ALL_USERS_SUCCESS:
+            return {
+                loading: false,
+                users: action.payload,
+            };
+
+        case ALL_USERS_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+
+        default:
+            return state;
+    }
+};

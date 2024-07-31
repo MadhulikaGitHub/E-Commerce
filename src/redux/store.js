@@ -5,8 +5,8 @@ import { categoriesReducer } from './reducers/CategoryReducer';
 import { productDetailsReducer, productReducer } from './reducers/ProductReducer';
 import { cartReducer } from './reducers/CartReducer';
 import { sliderReducer } from './reducers/SliderReducer';
-import { userRegisterReducer } from './reducers/UserReducer';
-import { myOrdersReducer, newOrderReducer, orderDetailsReducer } from './reducers/OrderReducer';
+import { allUsersReducer, userRegisterReducer } from './reducers/UserReducer';
+import { allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer } from './reducers/OrderReducer';
 
 const reducer = combineReducers({
     cat: categoriesReducer,
@@ -18,6 +18,8 @@ const reducer = combineReducers({
     newOrder: newOrderReducer,
     myOrders: myOrdersReducer,
     orderDetail: orderDetailsReducer,
+    allOrders: allOrdersReducer,
+    allUsers: allUsersReducer 
 })
 
 let initializeState = {

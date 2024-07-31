@@ -27,6 +27,8 @@ import ProductList from './component/admin/ProductList'
 import CategoryList from './component/admin/CategoryList'
 import CreateCategory from './component/admin/CreateCategory'
 import CreateProduct from './component/admin/CreateProduct'
+import OrderList from './component/admin/OrderList'
+import UserList from './component/admin/UserList'
 
 function App() {
 
@@ -65,6 +67,8 @@ function App() {
         <Route path="admin/category" element={<CategoryList/>} />
         <Route path="admin/createCategory" element={<CreateCategory/>} />
         <Route path="admin/createProduct" element={<CreateProduct/>} />
+        <Route path="admin/order" element={<OrderList/>} />
+        <Route path='admin/users' element={<UserList/>}/>
 
 
         {/* Secure */}

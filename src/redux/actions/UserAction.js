@@ -1,4 +1,8 @@
 import {
+    ALL_USERS_REQUEST,
+    ALL_USERS_SUCCESS,
+    ALL_USERS_FAIL,
+
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAIL,
@@ -160,16 +164,31 @@ export const updatePassword = (oldPassword, newPassword, confirmPassword) => asy
         dispatch({ type: LOGOUT_SUCCESS });
 
         dispatch({ type: CLEAR_ERRORS });
-        
+
         // Redirect to login page
         window.location.href = '/login';
-        
+
     } catch (error) {
         dispatch({
             type: UPDATE_PASSWORD_FAIL,
             payload: error.response.data.message,
         });
-        
+
+    }
+};
+
+export const getAllUsers = () => async (dispatch) => {
+    try {
+        dispatch({ type: ALL_USERS_REQUEST });
+
+        const { data } = await axios.get("/api/getAllUsers");
+
+        dispatch({ type: ALL_USERS_SUCCESS, payload: data.data });
+    } catch (error) {
+        dispatch({
+            type: ALL_USERS_FAIL,
+            payload: error.response.data.message,
+        });
     }
 };
 
