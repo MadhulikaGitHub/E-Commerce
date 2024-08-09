@@ -3,7 +3,9 @@ import { Link, useParams } from 'react-router-dom'
 import "./order.css";
 
 import Loading from '../layout/Loading'
-import { Typography } from "@material-ui/core";
+// import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+
 import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
